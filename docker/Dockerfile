@@ -10,6 +10,7 @@ RUN set -ex \
  && apt-get install -y \
     cmake \
     cython3 \
+    gfortran \
     git \
     libfftw3-dev \
     libgdal-dev \
@@ -30,6 +31,7 @@ COPY . /opt/isce2/src/isce2
 RUN set -ex \
  && cd /opt/isce2/src/isce2 \
  && mkdir build && cd build \
+ && export FC=gfortran \
  && cmake .. \
         -DPYTHON_MODULE_DIR="$(python3 -c 'import site; print(site.getsitepackages()[-1])')" \
         -DCMAKE_INSTALL_PREFIX=install \
