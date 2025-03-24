@@ -60,6 +60,7 @@ RUN set -ex \
     python3-h5py \
     python3-numpy \
     python3-scipy \
+    curl \
  && echo done
 
 # install ISCE from DEB
@@ -68,3 +69,20 @@ COPY --from=builder /tmp/isce*.deb /tmp/isce2.deb
 RUN dpkg -i /tmp/isce2.deb
 
 RUN ln -s /usr/lib/python3.8/dist-packages/isce2 /usr/lib/python3.8/dist-packages/isce
+
+# Set ISCE environment variables
+ENV ISCE_HOME=/usr/lib/python3.8/dist-packages/isce
+ENV PATH=${ISCE_HOME}/applications:$PATH
+ENV ISCE_LOG_LEVEL=DEBUG
+
+# Create a directory for ALOS data
+RUN mkdir -p /home/data && mkdir -p /home/results && mkdir -p /home/xml
+
+# Mount the ALOS data
+VOLUME /home/data
+
+# Mount the results
+VOLUME /home/results
+
+# Mount the XML file
+VOLUME /home/xml

@@ -9,3 +9,14 @@ config.log
 insar.log
 isce.log
 .ipynb_checkpoints
+
+# Satellite images
+alos-data/*
+!alos-data/.gitkeep
+
+# ISCE results
+results/*
+!results/.gitkeep
+
+# NASA Earthdata credentials
+netrc/.netrc
