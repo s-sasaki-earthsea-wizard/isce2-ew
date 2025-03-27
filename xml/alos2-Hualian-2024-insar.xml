@@ -1,0 +1,23 @@
+<stripmapApp>
+<component name="stripmapApp">
+    <property name="sensor name">ALOS2</property>
+    <component name="Reference">
+        <property name="IMAGEFILE">
+            /home/data/Hualian-2024/L11_ALOS2524453150-240208-HH-F3/IMG-HH-ALOS2524453150-240208-WWDR1.1__D-F3
+        </property>
+        <property name="LEADERFILE">
+            /home/data/Hualian-2024/L11_ALOS2524453150-240208-HH-F3/LED-ALOS2524453150-240208-WWDR1.1__D
+        </property>
+        <property name="OUTPUT">20240208</property>
+    </component>
+    <component name="Secondary">
+        <property name="IMAGEFILE">
+            /home/data/Hualian-2024/L11_ALOS2532733150-240404-HH-F3/IMG-HH-ALOS2532733150-240404-WWDR1.1__D-F3
+        </property>
+        <property name="LEADERFILE">
+            /home/data/Hualian-2024/L11_ALOS2532733150-240404-HH-F3/LED-ALOS2532733150-240404-WWDR1.1__D
+        </property>
+        <property name="OUTPUT">20240404</property>
+    </component>
+</component>
+</stripmapApp>

@@ -50,7 +50,7 @@ isce2-run:
 	  -v $(PWD)/results:/home/results \
 	  -v $(PWD)/xml:/home/xml \
 	  -v $(HOME)/.netrc:/root/.netrc:ro \
-	  isce2:latest /bin/bash -c "cd /home/results && stripmapApp.py /home/xml/alos2-insar.xml"
+	  isce2:latest /bin/bash -c "cd /home/results && stripmapApp.py /home/xml/alos2-Noto-insar.xml"
 
 # Help
 # --------------------

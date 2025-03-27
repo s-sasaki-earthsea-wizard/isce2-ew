@@ -3,19 +3,19 @@
     <property name="sensor name">ALOS2</property>
     <component name="Reference">
         <property name="IMAGEFILE">
-            /home/data/L11_ALOS2487932830-230606/IMG-HH-ALOS2487932830-230606-UBSL1.1__D
+            /home/data/Noto-2024/L11_ALOS2487932830-230606/IMG-HH-ALOS2487932830-230606-UBSL1.1__D
         </property>
         <property name="LEADERFILE">
-            /home/data/L11_ALOS2487932830-230606/LED-ALOS2487932830-230606-UBSL1.1__D
+            /home/data/Noto-2024/L11_ALOS2487932830-230606/LED-ALOS2487932830-230606-UBSL1.1__D
         </property>
         <property name="OUTPUT">20230606</property>
     </component>
     <component name="Secondary">
         <property name="IMAGEFILE">
-            /home/data/L11_ALOS2518982830-240102/IMG-HH-ALOS2518982830-240102-UBSL1.1__D
+            /home/data/Noto-2024/L11_ALOS2518982830-240102/IMG-HH-ALOS2518982830-240102-UBSL1.1__D
         </property>
         <property name="LEADERFILE">
-            /home/data/L11_ALOS2518982830-240102/LED-ALOS2518982830-240102-UBSL1.1__D
+            /home/data/Noto-2024/L11_ALOS2518982830-240102/LED-ALOS2518982830-240102-UBSL1.1__D
         </property>
         <property name="OUTPUT">20240102</property>
     </component>
