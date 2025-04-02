@@ -1,4 +1,4 @@
-.PHONY: docker-build docker-run docker-build-cuda docker-run-cuda docker-clean
+.PHONY: docker-build docker-run docker-build-cuda docker-run-cuda docker-clean visualize-build visualize-run visualize-clean
 default: help
 
 CONTAINER_NAME:= hysds/isce2
@@ -52,6 +52,29 @@ isce2-run:
 	  -v $(HOME)/.netrc:/root/.netrc:ro \
 	  isce2:latest /bin/bash -c "cd /home/results && stripmapApp.py /home/xml/alos2-Noto-insar.xml"
 
+# --------------------
+# Visualization docker commands
+# --------------------
+
+visualize-build:
+	docker build -t $(CONTAINER_NAME)-visualize -f visualize/Dockerfile visualize/
+
+visualize-run:
+	docker run --rm -it --memory $(MEMORY_LIMIT) \
+	-v $(shell pwd)/results:/app/results \
+	-v $(shell pwd)/visualize/src/:/app/src \
+	-v $(shell pwd)/visualize/visualize-outputs:/app/visualize-outputs \
+	-v $(shell pwd)/visualize/Makefile:/app/Makefile \
+	$(CONTAINER_NAME)-visualize bash
+
+visualize-stop:
+	docker stop $(docker ps -a --filter ancestor=$(CONTAINER_NAME)-visualize --format "{{.ID}}")
+
+visualize-clean:
+	docker rm $(docker ps -a --filter ancestor=$(CONTAINER_NAME)-visualize --format "{{.ID}}")
+	docker rmi $(CONTAINER_NAME)-visualize
+
+# --------------------
 # Help
 # --------------------
 
