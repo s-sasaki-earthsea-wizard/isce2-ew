@@ -1,0 +1,20 @@
+# Exclude large InSAR data directories
+results/
+*.rdr
+*.vrt
+*.raw
+*.slc
+*.dem
+*.hgt
+*.h5
+*.nc
+*.tif
+*.img
+*.bin
+*.dat
+*.xml
+*.json
+*.log
+*.txt
+!requirements.txt
+!README.md 

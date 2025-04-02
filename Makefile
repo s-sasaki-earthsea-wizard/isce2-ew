@@ -71,7 +71,6 @@ visualize-stop:
 	docker stop $(docker ps -a --filter ancestor=$(CONTAINER_NAME)-visualize --format "{{.ID}}")
 
 visualize-clean:
-	docker rm $(docker ps -a --filter ancestor=$(CONTAINER_NAME)-visualize --format "{{.ID}}")
 	docker rmi $(CONTAINER_NAME)-visualize
 
 # --------------------

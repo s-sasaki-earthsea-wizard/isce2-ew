@@ -18,5 +18,9 @@ alos-data/*
 results/*
 !results/.gitkeep
 
+# Visualize outputs
+visualize/visualize-outputs/*
+!visualize/visualize-outputs/.gitkeep
+
 # NASA Earthdata credentials
 netrc/.netrc

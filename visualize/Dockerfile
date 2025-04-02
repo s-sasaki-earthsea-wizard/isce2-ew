@@ -1,6 +1,6 @@
 FROM python:3.11-slim
 
-# Install system dependencies for GDAL
+# Install system dependencies for rasterio
 RUN apt-get update && apt-get install -y \
     build-essential \
     gdal-bin libgdal-dev \
@@ -22,8 +22,6 @@ WORKDIR /app
 # Copy requirements and install Python packages
 COPY requirements.txt .
 RUN pip install --upgrade pip && \
-    GDAL_VERSION=$(gdal-config --version) && \
-    sed -i "s/gdal/gdal==$GDAL_VERSION/" requirements.txt && \
     pip install --no-cache-dir -r requirements.txt
 RUN rm requirements.txt
 
