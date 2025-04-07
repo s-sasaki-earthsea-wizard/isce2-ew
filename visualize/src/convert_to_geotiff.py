@@ -29,12 +29,40 @@ def create_geotiff(input_file, output_file, dem_file_path=None, band=1):
         # If dem_file is provided and input is not DEM, use DEM's geotransform
         if dem_file_path and 'dem' not in input_file:
             with rasterio.open(dem_file_path) as dem:
+                # Get DEM's geotransform and CRS
+                transform = dem.transform
+                crs = dem.crs
+                
+                # Calculate scale factors for interferogram
+                if 'interferogram' in input_file:
+                    # Get DEM dimensions
+                    dem_width = dem.width
+                    dem_height = dem.height
+                    
+                    # Get interferogram dimensions
+                    ifg_width = src.width
+                    ifg_height = src.height
+                    
+                    # Calculate scale factors
+                    scale_x = dem_width / ifg_width
+                    scale_y = dem_height / ifg_height
+                    
+                    # Adjust transform for interferogram
+                    transform = rasterio.transform.from_origin(
+                        transform[2],  # x origin
+                        transform[5],  # y origin
+                        transform[0] * scale_x,  # pixel width
+                        transform[4] * scale_y   # pixel height
+                    )
+                
                 meta.update({
                     'count': 1,  # Number of bands
                     'dtype': 'float32',
                     'driver': 'GTiff',
-                    'crs': dem.crs,
-                    'transform': dem.transform
+                    'crs': crs,
+                    'transform': transform,
+                    'width': src.width,
+                    'height': src.height
                 })
         else:
             meta.update({
@@ -42,7 +70,9 @@ def create_geotiff(input_file, output_file, dem_file_path=None, band=1):
                 'dtype': 'float32',
                 'driver': 'GTiff',
                 'crs': src.crs,
-                'transform': src.transform
+                'transform': src.transform,
+                'width': src.width,
+                'height': src.height
             })
         
         # Create output file
@@ -226,19 +256,19 @@ def convert_files(vrt_files, output_files):
     except Exception as e:
         print(f"❌ Error occurred while converting DEM: {e}")
     
-    # Convert interferogram
+    # Convert interferogram (phase)
     try:
-        create_geotiff(vrt_files['interferogram'], output_files['interferogram'], dem_file_path=vrt_files['dem'])
-        print("✅ Interferogram conversion completed")
+        create_geotiff(vrt_files['interferogram'], output_files['interferogram'], dem_file_path=vrt_files['dem'], band=1)
+        print("✅ Interferogram (phase) conversion completed")
     except Exception as e:
-        print(f"❌ Error occurred while converting interferogram: {e}")
+        print(f"❌ Error occurred while converting interferogram (phase): {e}")
     
-    # Convert correlation map
+    # Convert correlation map (amplitude)
     try:
         create_geotiff(vrt_files['interferogram'], output_files['correlation'], dem_file_path=vrt_files['dem'], band=2)
-        print("✅ Correlation map conversion completed")
+        print("✅ Correlation map (amplitude) conversion completed")
     except Exception as e:
-        print(f"❌ Error occurred while converting correlation map: {e}")
+        print(f"❌ Error occurred while converting correlation map (amplitude): {e}")
 
 def main():
     """
